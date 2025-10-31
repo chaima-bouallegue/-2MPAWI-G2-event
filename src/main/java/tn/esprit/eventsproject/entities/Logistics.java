@@ -23,7 +23,6 @@ public class Logistics implements Serializable {
     float prixUnit;
     int quantite;
 
-    // ✅ Ajout de la relation vers Event
     @ManyToOne
     Event event;
 }

@@ -64,8 +64,17 @@ public class LogisticsServicesImplTest {
     public void testFindAllLogistics() {
         log.info("Début du test de récupération de tous les matériels logistiques");
 
-        Logistics l1 = new Logistics(0, "Chaise pliante", false, 30f, 50);
-        Logistics l2 = new Logistics(0, "Table ronde", true, 120f, 20);
+        Logistics l1 = new Logistics();
+        l1.setDescription("Chaise pliante");
+        l1.setReserve(false);
+        l1.setPrixUnit(30f);
+        l1.setQuantite(50);
+
+        Logistics l2 = new Logistics();
+        l2.setDescription("Table ronde");
+        l2.setReserve(true);
+        l2.setPrixUnit(120f);
+        l2.setQuantite(20);
 
         logisticsRepository.save(l1);
         logisticsRepository.save(l2);

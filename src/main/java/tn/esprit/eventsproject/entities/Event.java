@@ -15,6 +15,7 @@ import java.util.Set;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Entity
 public class Event implements Serializable {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     int idEvent;
@@ -27,7 +28,6 @@ public class Event implements Serializable {
     @ManyToMany(mappedBy = "events")
     Set<Participant> participants;
 
-    // ✅ Relation bidirectionnelle avec Logistics
     @OneToMany(mappedBy = "event", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     Set<Logistics> logistics;
 }
