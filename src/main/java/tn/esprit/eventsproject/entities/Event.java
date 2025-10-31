@@ -18,13 +18,16 @@ public class Event implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     int idEvent;
+
     String description;
     LocalDate dateDebut;
     LocalDate dateFin;
     float cout;
+
     @ManyToMany(mappedBy = "events")
     Set<Participant> participants;
-    @OneToMany(fetch = FetchType.EAGER)
-    Set<Logistics> logistics;
 
+    // ✅ Relation bidirectionnelle avec Logistics
+    @OneToMany(mappedBy = "event", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    Set<Logistics> logistics;
 }
