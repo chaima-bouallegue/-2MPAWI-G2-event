@@ -24,7 +24,6 @@ public class Participant implements Serializable {
 
     @Enumerated(EnumType.STRING)
     Tache tache;
-
-    @ManyToMany
+   @ManyToMany(mappedBy = "participants")
     Set<Event> events;
 }
