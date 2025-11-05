@@ -41,24 +41,16 @@
             <scope>runtime</scope>
         </dependency>
 
-        <!-- Spring Boot JPA -->
+        <!-- Spring Boot Web -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
         </dependency>
 
-        <!-- Spring Boot Web -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
-        </dependency>
-
         <!-- Outils de développement -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-devtools</artifactId>
-            <scope>runtime</scope>
-            <optional>true</optional>
+            <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
 
         <!-- Connecteur MySQL -->
@@ -154,13 +146,13 @@
         <repository>
             <id>eventRepoRelease</id>
             <name>Event Nexus Repository Releases</name>
-            <url>http://localhost:8085/repository/maven-releases/</url>
+            <url>http://localhost:8081/repository/maven-releases/</url>
         </repository>
 
         <snapshotRepository>
             <id>eventRepoSnapshot</id>
             <name>Event Nexus Repository Snapshots</name>
-            <url>http://localhost:8085/repository/maven-snapshots/</url>
+            <url>http://localhost:8081/repository/maven-snapshots/</url>
         </snapshotRepository>
     </distributionManagement>
     <repositories>
