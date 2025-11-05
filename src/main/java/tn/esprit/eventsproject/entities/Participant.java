@@ -7,7 +7,6 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Set;
 
-
 @Getter
 @Setter
 @AllArgsConstructor
@@ -15,14 +14,16 @@ import java.util.Set;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Entity
 public class Participant implements Serializable {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     int idPart;
+
     String nom;
     String prenom;
+
     @Enumerated(EnumType.STRING)
     Tache tache;
    @ManyToMany(mappedBy = "participants")
     Set<Event> events;
-
 }
