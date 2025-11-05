@@ -33,6 +33,8 @@ public class EventServicesImpl implements IEventServices{
 
     @Override
     public Event addAffectEvenParticipant(Event event, int idParticipant) {
+        System.out.println("Service Event exécuté par Chaima - createEvent");
+
         Participant participant = participantRepository.findById(idParticipant).orElse(null);
         if(participant.getEvents() == null){
             Set<Event> events = new HashSet<>();
