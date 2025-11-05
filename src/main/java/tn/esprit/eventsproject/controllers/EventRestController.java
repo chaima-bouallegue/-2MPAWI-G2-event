@@ -1,6 +1,7 @@
 package tn.esprit.eventsproject.controllers;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
 import tn.esprit.eventsproject.entities.Event;
 import tn.esprit.eventsproject.entities.Logistics;
@@ -10,30 +11,44 @@ import tn.esprit.eventsproject.services.IEventServices;
 import java.time.LocalDate;
 import java.util.List;
 
-@RequiredArgsConstructor
-@RequestMapping("event")
 @RestController
+@RequiredArgsConstructor
+@RequestMapping("/event")
+@CrossOrigin("*")
 public class EventRestController {
+
     private final IEventServices eventServices;
 
-    @PostMapping("/addPart")
-    public Participant addParticipant(@RequestBody Participant participant){
+    // ✅ Ajouter un participant
+    @PostMapping("/participants")
+    public Participant addParticipant(@RequestBody Participant participant) {
         return eventServices.addParticipant(participant);
     }
-    @PostMapping("/addEvent/{id}")
-    public Event addEventPart(@RequestBody Event event, @PathVariable("id") int idPart){
-        return eventServices.addAffectEvenParticipant(event, idPart);
+
+    // ✅ Ajouter un événement et l'affecter à un participant
+    @PostMapping("/participants/{participantId}/events")
+    public Event addEventToParticipant(@RequestBody Event event, @PathVariable int participantId) {
+        return eventServices.addAffectEvenParticipant(event, participantId);
     }
-    @PostMapping("/addEvent")
-    public Event addEvent(@RequestBody Event event){
+
+    // ✅ Ajouter un événement sans affectation
+    @PostMapping
+    public Event addEvent(@RequestBody Event event) {
         return eventServices.addAffectEvenParticipant(event);
     }
-    @PutMapping("/addAffectLog/{description}")
-    public Logistics addAffectLog(@RequestBody Logistics logistics,@PathVariable("description") String descriptionEvent){
-        return eventServices.addAffectLog(logistics,descriptionEvent);
+
+    // ✅ Affecter une logistique à un événement
+    @PutMapping("/events/{description}/logistics")
+    public Logistics addLogisticsToEvent(@RequestBody Logistics logistics,
+                                         @PathVariable String description) {
+        return eventServices.addAffectLog(logistics, description);
     }
-    @GetMapping("/getLogs/{d1}/{d2}")
-    public List<Logistics> getLogistiquesDates (@PathVariable("d1") LocalDate date_debut, @PathVariable("d2") LocalDate date_fin){
-        return eventServices.getLogisticsDates(date_debut,date_fin);
+
+    // ✅ Récupérer les logistiques entre deux dates
+    @GetMapping("/logistics/{startDate}/{endDate}")
+    public List<Logistics> getLogisticsBetweenDates(
+            @PathVariable("startDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate,
+            @PathVariable("endDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate) {
+        return eventServices.getLogisticsDates(startDate, endDate);
     }
 }
