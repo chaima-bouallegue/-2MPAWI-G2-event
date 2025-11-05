@@ -22,7 +22,7 @@ public class Participant implements Serializable {
     String prenom;
     @Enumerated(EnumType.STRING)
     Tache tache;
-    @ManyToMany
+   @ManyToMany(mappedBy = "participants")
     Set<Event> events;
 
 }
