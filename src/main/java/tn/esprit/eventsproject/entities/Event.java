@@ -22,9 +22,14 @@ public class Event implements Serializable {
     LocalDate dateDebut;
     LocalDate dateFin;
     float cout;
-    @ManyToMany(mappedBy = "events")
+   @ManyToMany  // ← CHANGEMENT ICI (propriétaire de la relation)
+    @JoinTable(
+        name = "event_participant",
+        joinColumns = @JoinColumn(name = "event_id"),
+        inverseJoinColumns = @JoinColumn(name = "participant_id")
+    )
     Set<Participant> participants;
+    
     @OneToMany(fetch = FetchType.EAGER)
     Set<Logistics> logistics;
-
 }
