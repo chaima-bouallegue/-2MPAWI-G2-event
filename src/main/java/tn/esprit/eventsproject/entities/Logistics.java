@@ -23,6 +23,8 @@ public class Logistics implements Serializable {
     float prixUnit;
     int quantite;
 
+    // ✅ Ajout obligatoire pour la relation OneToMany côté Event
     @ManyToOne
-    Event event;
+    @JoinColumn(name = "event_id") // clé étrangère en base
+            Event event;
 }

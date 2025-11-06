@@ -29,7 +29,7 @@ public class Event implements Serializable {
         inverseJoinColumns = @JoinColumn(name = "participant_id")
     )
     Set<Participant> participants;
-    
+
     @OneToMany(fetch = FetchType.EAGER)
     Set<Logistics> logistics;
 }
