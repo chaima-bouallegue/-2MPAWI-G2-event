@@ -18,15 +18,17 @@ public class Event implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     int idEvent;
+
     String description;
     LocalDate dateDebut;
     LocalDate dateFin;
     float cout;
-   @ManyToMany  // ← CHANGEMENT ICI (propriétaire de la relation)
+
+    @ManyToMany
     @JoinTable(
-        name = "event_participant",
-        joinColumns = @JoinColumn(name = "event_id"),
-        inverseJoinColumns = @JoinColumn(name = "participant_id")
+            name = "event_participant",
+            joinColumns = @JoinColumn(name = "event_id"),
+            inverseJoinColumns = @JoinColumn(name = "participant_id")
     )
     Set<Participant> participants;
 
