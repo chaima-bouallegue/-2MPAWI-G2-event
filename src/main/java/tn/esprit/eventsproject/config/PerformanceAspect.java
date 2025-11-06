@@ -10,13 +10,13 @@ import org.springframework.stereotype.Component;
 @Aspect
 @Component
 public class PerformanceAspect {
+
     @Around("execution(* tn.esprit.eventsproject.services.*.*(..))")
     public Object profile(ProceedingJoinPoint pjp) throws Throwable {
         long start = System.currentTimeMillis();
         Object obj = pjp.proceed();
         long elapsedTime = System.currentTimeMillis() - start;
-        log.info(pjp.getSignature().getName() +" Method execution time: " + elapsedTime
-                +"milliseconds.");
+        log.info("Method execution time: " + elapsedTime + " milliseconds.");
         return obj;
     }
 }
