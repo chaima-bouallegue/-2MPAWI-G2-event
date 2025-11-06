@@ -16,61 +16,77 @@
     <artifactId>eventsProject</artifactId>
     <version>0.0.3-SNAPSHOT</version>
     <name>eventsProject</name>
-    <description>eventsProject</description>
+    <description>Spring Boot Project - Events Management</description>
 
+    <!-- ✅ Propriétés globales -->
     <properties>
         <java.version>1.8</java.version>
+
+        <!-- ✅ Configuration SonarQube -->
+        <sonar.projectKey>eventsProject</sonar.projectKey>
+        <sonar.host.url>http://localhost:9000</sonar.host.url>
+        <sonar.token>TON_TOKEN_SONAR_ICI</sonar.token>
+
+        <!-- ✅ Rapport de couverture JaCoCo -->
+        <sonar.coverage.jacoco.xmlReportPaths>${project.basedir}/target/site/jacoco/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
     </properties>
 
+    <!-- ✅ Dépendances -->
     <dependencies>
 
-
-        <dependency>
-            <groupId>com.h2database</groupId>
-            <artifactId>h2</artifactId>
-            <scope>runtime</scope>
-        </dependency>
+        <!-- Base de données en mémoire -->
         <dependency>
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
             <scope>runtime</scope>
         </dependency>
 
+        <!-- Spring Boot Web -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
         </dependency>
 
+        <!-- Outils de développement -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
 
+        <!-- Connecteur MySQL -->
         <dependency>
             <groupId>com.mysql</groupId>
             <artifactId>mysql-connector-j</artifactId>
             <scope>runtime</scope>
         </dependency>
 
+        <!-- Lombok -->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <optional>true</optional>
         </dependency>
 
+        <!-- Tests unitaires -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
+
+        <!-- JUnit -->
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
         </dependency>
+
     </dependencies>
 
+    <!-- ✅ Configuration du build -->
     <build>
         <plugins>
+
+            <!-- Plugin Spring Boot -->
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
@@ -84,6 +100,7 @@
                 </configuration>
             </plugin>
 
+            <!-- Plugin Release -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-release-plugin</artifactId>
@@ -92,10 +109,39 @@
                     <tagNameFormat>v@{project.version}</tagNameFormat>
                 </configuration>
             </plugin>
+
+            <!-- ✅ Plugin JaCoCo (Couverture de code) -->
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <version>0.8.12</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>prepare-agent</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>report</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>report</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <!-- ✅ Plugin SonarQube -->
+            <plugin>
+                <groupId>org.sonarsource.scanner.maven</groupId>
+                <artifactId>sonar-maven-plugin</artifactId>
+                <version>3.11.0.3922</version>
+            </plugin>
+
         </plugins>
     </build>
 
-    <!-- ✅ Distribution vers Nexus -->
+    <!-- ✅ Déploiement vers Nexus -->
     <distributionManagement>
         <repository>
             <id>eventRepoRelease</id>
@@ -109,5 +155,20 @@
             <url>http://localhost:8081/repository/maven-snapshots/</url>
         </snapshotRepository>
     </distributionManagement>
+    <repositories>
+        <repository>
+            <id>central</id>
+            <name>Maven Central</name>
+            <url>https://repo.maven.apache.org/maven2</url>
+        </repository>
+    </repositories>
+
+    <pluginRepositories>
+        <pluginRepository>
+            <id>central</id>
+            <name>Maven Central Plugin Repository</name>
+            <url>https://repo.maven.apache.org/maven2</url>
+        </pluginRepository>
+    </pluginRepositories>
 
 </project>

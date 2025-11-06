@@ -14,6 +14,7 @@ import java.util.Set;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Entity
 public class Participant implements Serializable {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     int idPart;
