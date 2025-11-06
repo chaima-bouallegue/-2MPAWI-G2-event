@@ -15,26 +15,21 @@ import java.util.Set;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Entity
 public class Event implements Serializable {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     int idEvent;
-
     String description;
     LocalDate dateDebut;
     LocalDate dateFin;
     float cout;
-
-    // ✅ Owning side of ManyToMany
-    @ManyToMany
+   @ManyToMany  // ← CHANGEMENT ICI (propriétaire de la relation)
     @JoinTable(
-            name = "event_participant",
-            joinColumns = @JoinColumn(name = "event_id"),
-            inverseJoinColumns = @JoinColumn(name = "participant_id")
+        name = "event_participant",
+        joinColumns = @JoinColumn(name = "event_id"),
+        inverseJoinColumns = @JoinColumn(name = "participant_id")
     )
     Set<Participant> participants;
 
-    // ✅ mappedBy obligatoire pour empêcher JPA de créer une table intermédiaire
-    @OneToMany(mappedBy = "event", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(fetch = FetchType.EAGER)
     Set<Logistics> logistics;
 }
