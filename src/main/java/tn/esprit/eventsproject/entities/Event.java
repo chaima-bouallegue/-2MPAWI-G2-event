@@ -16,7 +16,9 @@ import java.util.Set;
 @Entity
 public class Event implements Serializable {
 
-    System.out.println(" Event chargé par Nouha Madien - 2MPAWI-G2");
+    static {
+        System.out.println("Event chargé par Nouha Madien - 2MPAWI-G2");
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
