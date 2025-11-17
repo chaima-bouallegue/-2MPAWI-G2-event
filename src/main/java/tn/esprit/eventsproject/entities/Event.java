@@ -15,6 +15,9 @@ import java.util.Set;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Entity
 public class Event implements Serializable {
+
+    System.out.println(" Event chargé par Nouha Madien - 2MPAWI-G2");
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     int idEvent;
