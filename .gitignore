@@ -1,3 +1,9 @@
+# Terraform
+terraform/terraform.tfstate
+terraform/terraform.tfstate.backup
+terraform/.terraform/
+terraform/*.tfplan
+terraform/.terraform.lock.hcl
 HELP.md
 target/
 !.mvn/wrapper/maven-wrapper.jar
