@@ -1,35 +1,36 @@
 variable "aws_region" {
-  description = "La région AWS"
+  description = "AWS Region"
   type        = string
-  default     = "us-east-1"  # Région mise à jour
+  default     = "us-east-1"
 }
 
 variable "cluster_name" {
-  description = "Nom du cluster EKS"
+  description = "EKS Cluster Name"
   type        = string
-  default     = "mykubernetes"  # Nom du cluster mis à jour
-}
-
-variable "subnet_ids" {
-  description = "IDs des sous-réseaux"
-  type        = list(string)
-  default     = ["subnet-0de96e04e6978aeea", "subnet-0605ef5fce965abc4"]  # Valeurs par défaut
+  default     = "mykubernetes"
 }
 
 variable "role_arn" {
-  description = "ARN du rôle IAM pour EKS"
+  description = "IAM Role ARN for EKS"
   type        = string
-  default     = "arn:aws:iam::862116348508:role/LabRole"  # Valeur par défaut
+  default     = "arn:aws:iam::862116348508:role/LabRole"
 }
 
 variable "vpc_id" {
-  description = "L'ID du VPC pour le cluster EKS"
+  description = "VPC ID"
   type        = string
-  default     = "vpc-0eb8a940c43ab9440"  # Remplacez par votre ID de VPC réel
+  default     = "vpc-0f9744da00d2ff58f"  # ✅ VPC actuel
 }
 
-variable "vpc_cidr" {
-  description = "CIDR block for the VPC"
-  type        = string
-  default     = "10.0.0.0/16"  # Modifiez-le selon vos besoins
+variable "subnet_ids" {
+  description = "Subnet IDs"
+  type        = list(string)
+  default     = [
+    "subnet-01f676b40453c9420",
+    "subnet-071ccf1b469827d32",
+    "subnet-0707c1dcae13db5e0",
+    "subnet-0193571655f38f806",
+    "subnet-0123437dc1c499180",
+    "subnet-00edba30ded827d0e"
+  ]
 }

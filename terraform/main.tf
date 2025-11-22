@@ -2,23 +2,15 @@ provider "aws" {
   region = var.aws_region
 }
 
-# ✅ Data sources pour récupérer automatiquement VPC et subnets
-data "aws_vpc" "default" {
-  default = true
-}
-
-data "aws_subnets" "default" {
-  filter {
-    name   = "vpc-id"
-    values = [data.aws_vpc.default.id]
-  }
-}
+# ❌ SUPPRIMER les data sources (AWS Academy les bloque)
+# data "aws_vpc" "default" { ... }
+# data "aws_subnets" "default" { ... }
 
 # Security group pour le cluster EKS
 resource "aws_security_group" "eks_cluster_sg" {
   name        = "eks-cluster-sg-${var.cluster_name}"
   description = "Security group for EKS cluster ${var.cluster_name}"
-  vpc_id      = data.aws_vpc.default.id  # ✅ Utilise le VPC automatique
+  vpc_id      = var.vpc_id  # ✅ Utilise la variable
   
   ingress {
     from_port   = 8083
@@ -50,7 +42,7 @@ resource "aws_security_group" "eks_cluster_sg" {
 resource "aws_security_group" "eks_worker_sg" {
   name        = "eks-worker-sg-${var.cluster_name}"
   description = "Security group for EKS worker nodes ${var.cluster_name}"
-  vpc_id      = data.aws_vpc.default.id  # ✅ Utilise le VPC automatique
+  vpc_id      = var.vpc_id  # ✅ Utilise la variable
   
   ingress {
     from_port   = 8083
@@ -85,7 +77,7 @@ resource "aws_eks_cluster" "my_cluster" {
   version  = "1.30"
   
   vpc_config {
-    subnet_ids              = data.aws_subnets.default.ids  # ✅ Utilise les subnets automatiques
+    subnet_ids              = var.subnet_ids  # ✅ Utilise la variable
     security_group_ids      = [aws_security_group.eks_cluster_sg.id]
     endpoint_public_access  = true
     endpoint_private_access = false
@@ -99,7 +91,7 @@ resource "aws_eks_node_group" "my_node_group" {
   cluster_name    = aws_eks_cluster.my_cluster.name
   node_group_name = "noeud1"
   node_role_arn   = var.role_arn
-  subnet_ids      = data.aws_subnets.default.ids  # ✅ Utilise les subnets automatiques
+  subnet_ids      = var.subnet_ids  # ✅ Utilise la variable
   
   scaling_config {
     desired_size = 2
@@ -110,7 +102,7 @@ resource "aws_eks_node_group" "my_node_group" {
   depends_on = [aws_eks_cluster.my_cluster]
 }
 
-# ✅ Outputs (maintenant qu'outputs.tf n'existe plus, on peut les remettre ici)
+# Outputs
 output "cluster_name" {
   description = "EKS Cluster Name"
   value       = aws_eks_cluster.my_cluster.name
