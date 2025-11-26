@@ -19,18 +19,17 @@ variable "role_arn" {
 variable "vpc_id" {
   description = "VPC ID"
   type        = string
-  default     = "vpc-0f9744da00d2ff58f"  # ✅ VPC actuel
+  default     = "vpc-0f9744da00d2ff58f"
 }
 
 variable "subnet_ids" {
   description = "Subnet IDs"
   type        = list(string)
   default     = [
-    "subnet-01f676b40453c9420",
-    "subnet-071ccf1b469827d32",
-    "subnet-0707c1dcae13db5e0",
-    "subnet-0193571655f38f806",
-    "subnet-0123437dc1c499180",
-    "subnet-00edba30ded827d0e"
+    "subnet-01f676b40453c9420", # us-east-1c
+    "subnet-071ccf1b469827d32", # us-east-1b
+    "subnet-0707c1dcae13db5e0", # us-east-1d
+    "subnet-0123437dc1c499180", # us-east-1f
+    "subnet-00edba30ded827d0e"  # us-east-1a
   ]
 }
