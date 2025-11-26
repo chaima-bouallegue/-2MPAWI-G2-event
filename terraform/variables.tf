@@ -7,7 +7,7 @@ variable "aws_region" {
 variable "cluster_name" {
   description = "EKS Cluster Name"
   type        = string
-  default     = "mykubernetes"
+  default     = "mykubernetes2"
 }
 
 variable "role_arn" {
