@@ -8,6 +8,6 @@ spec:
     app: my-spring-boot-app   # doit correspondre au label de ton Deployment
   ports:
     - protocol: TCP
-      port: 8090       # port interne du service dans le cluster (peut être le même que targetPort)
+      port: 8090       # port interne du service dans le cluster (peut être le même que targetPort) //metrics
       targetPort: 8089   # port sur lequel ton application écoute dans le conteneur
       nodePort: 30000    # port exposé sur le nœud pour accès externe
