@@ -36,6 +36,7 @@ build/
 *.tfstate
 *.tfstate.backup
 *.tfvars
+*.backup
 
 # Ignore editor temporary files
 *.log
