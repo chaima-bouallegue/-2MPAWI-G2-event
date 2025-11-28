@@ -1,16 +1,33 @@
+# -------------------------
 # Terraform
+# -------------------------
+# State files
 terraform/terraform.tfstate
 terraform/terraform.tfstate.backup
+
+# Local .terraform directory
 terraform/.terraform/
+
+# Plan files
 terraform/*.tfplan
+
+# Lock file
 terraform/.terraform.lock.hcl
-HELP.md
+
+# Ignore provider binaries
+terraform/.terraform/providers/
+
+# -------------------------
+# Maven / Java
+# -------------------------
 target/
 !.mvn/wrapper/maven-wrapper.jar
 !/src/main//target/
 !/src/test//target/
 
-### STS ###
+# -------------------------
+# STS / Eclipse
+# -------------------------
 .apt_generated
 .classpath
 .factorypath
@@ -19,13 +36,17 @@ target/
 .springBeans
 .sts4-cache
 
-### IntelliJ IDEA ###
-.idea
+# -------------------------
+# IntelliJ IDEA
+# -------------------------
+.idea/
 *.iws
 *.iml
 *.ipr
 
-### NetBeans ###
+# -------------------------
+# NetBeans
+# -------------------------
 /nbproject/private/
 /nbbuild/
 /dist/
@@ -35,5 +56,7 @@ build/
 !/src/main//build/
 !/src/test//build/
 
-### VS Code ###
+# -------------------------
+# VS Code
+# -------------------------
 .vscode/
