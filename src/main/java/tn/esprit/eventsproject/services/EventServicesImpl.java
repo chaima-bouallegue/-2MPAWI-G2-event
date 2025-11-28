@@ -9,8 +9,8 @@ import tn.esprit.eventsproject.entities.Logistics;
 import tn.esprit.eventsproject.entities.Participant;
 import tn.esprit.eventsproject.entities.Tache;
 import tn.esprit.eventsproject.repositories.EventRepository;
-import tn.esprit.eventsproject.repositories.LogisticsRepository;
 import tn.esprit.eventsproject.repositories.ParticipantRepository;
+import tn.esprit.eventsproject.repositories.LogisticsRepository;
 
 import java.time.LocalDate;
 import java.util.*;
@@ -54,21 +54,23 @@ public class EventServicesImpl implements IEventServices {
         return eventRepository.save(event);
     }
 
- @Override
-public Logistics addAffectLog(Logistics logistics, String descriptionEvent) {
-    System.out.println("Execution du service : ajout/logistique pour l'événement -> " + descriptionEvent);
-    Event event = eventRepository.findByDescription(descriptionEvent);
-    if(event.getLogistics() == null){
-        Set<Logistics> logisticsSet = new HashSet<>();
-        logisticsSet.add(logistics);
-        event.setLogistics(logisticsSet);
-        eventRepository.save(event);
-    } else {
-        event.getLogistics().add(logistics);
-    }
-    return logisticsRepository.save(logistics);
-}
+    @Override
+    public Logistics addAffectLog(Logistics logistics, String descriptionEvent) {
+        System.out.println("Execution du service : ajout/logistique pour l'événement -> " + descriptionEvent);
 
+        Event event = eventRepository.findByDescription(descriptionEvent);
+
+        if (event.getLogistics() == null) {
+            Set<Logistics> logisticsSet = new HashSet<>();
+            logisticsSet.add(logistics);
+            event.setLogistics(logisticsSet);
+            eventRepository.save(event);
+        } else {
+            event.getLogistics().add(logistics);
+        }
+
+        return logisticsRepository.save(logistics);
+    }
 
     @Override
     public List<Logistics> getLogisticsDates(LocalDate dateDebut, LocalDate dateFin) {
@@ -96,12 +98,14 @@ public Logistics addAffectLog(Logistics logistics, String descriptionEvent) {
             float somme = 0f;
             log.info("Event: {}", event.getDescription());
             Set<Logistics> logisticsSet = event.getLogistics();
+
             if (logisticsSet != null) {
                 for (Logistics logistics : logisticsSet) {
                     if (logistics.isReserve())
                         somme += logistics.getPrixUnit() * logistics.getQuantite();
                 }
             }
+
             event.setCout(somme);
             eventRepository.save(event);
             log.info("Cout de l'Event {} est {}", event.getDescription(), somme);
