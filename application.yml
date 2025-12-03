@@ -1,0 +1,8 @@
+server:
+  port: 8089       # Port sur lequel ton application écoute
+  address: 0.0.0.0       # Écoute sur toutes les interfaces réseau
+
+spring:
+  application:
+    name: my-spring-boot-app  # Nom de l'application
+
