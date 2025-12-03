@@ -14,8 +14,8 @@ variable "subnet_ids" {
   description = "IDs des sous-réseaux"
   type        = list(string)
   default     = [
-    "subnet-0297fc0436e1fd0ad",
-    "subnet-0897a86fb95208a40"
+    "subnet-0ce82f39cf86e0b08",
+    "subnet-0d0b8f52d89ae3abc"
   ]
 }
 
