@@ -13,19 +13,19 @@ variable "cluster_name" {
 variable "subnet_ids" {
   description = "IDs des sous-réseaux"
   type        = list(string)
-  default     = ["subnet-0d9fd7de1ad5fbc81", "subnet-0d819d5b6b4b23f82"]  # Valeurs par défaut
+  default     = ["subnet-0935da5cf0f4b6abc", "subnet-0b5638a36fee5aef0"]  # Valeurs par défaut
 }
 
 variable "role_arn" {
   description = "ARN du rôle IAM pour EKS"
   type        = string
-  default     = "arn:aws:iam::852972139078:role/LabRole"  # Valeur par défaut
+  default     = "arn:aws:iam::767397874976:role/LabRole"  # Valeur par défaut
 }
 
 variable "vpc_id" {
   description = "L'ID du VPC pour le cluster EKS"
   type        = string
-  default     = "vpc-0a759310647bd71cb"  # Remplacez par votre ID de VPC réel
+  default     = "vpc-0c844dba41b879dad"  # Remplacez par votre ID de VPC réel
 }
 
 variable "vpc_cidr" {
